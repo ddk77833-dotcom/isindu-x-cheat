@@ -3,875 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ISINDU x CHEAT - Cheat Generator</title>
+    <title>ISINDU x OPTIMIZE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #00ff41;
-            --secondary-color: #ff0040;
-            --dark-bg: #0a0a0a;
-            --darker-bg: #050505;
-            --light-text: #ffffff;
-            --dark-text: #cccccc;
-            --card-bg: rgba(20, 20, 20, 0.8);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --transition: all 0.3s ease;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--dark-bg);
-            color: var(--light-text);
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background-image: 
-                radial-gradient(circle at 20% 35%, rgba(0, 255, 65, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 75% 65%, rgba(255, 0, 64, 0.1) 0%, transparent 50%);
-        }
-        
-        .card {
-            width: 100%;
-            max-width: 800px;
-            border: 2px solid rgba(0, 255, 65, 0.2);
-            background-color: rgba(20, 20, 20, 0.6);
-            padding: 24px 32px;
-            border-radius: 12px;
-            box-shadow: 0 25px 50px -12px rgba(0, 255, 65, 0.1);
-            backdrop-filter: blur(10px);
-        }
-        
-        .card-header {
-            padding: 0;
-            padding-bottom: 24px;
-            text-align: center;
-        }
-        
-        .logo {
-            font-size: 36px;
-            font-weight: bold;
-            color: var(--light-text);
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .logo span {
-            color: var(--primary-color);
-        }
-        
-        .card-content {
-            padding: 0;
-        }
-        
-        .text-center {
-            text-align: center;
-        }
-        
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--light-text);
-        }
-        
-        .subtitle {
-            margin-top: 8px;
-            font-size: 18px;
-            color: var(--dark-text);
-        }
-        
-        .separator {
-            margin: 24px 0;
-            border: none;
-            height: 1px;
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .input {
-            width: 100%;
-            padding: 12px 16px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            color: var(--light-text);
-            font-size: 16px;
-            transition: var(--transition);
-        }
-        
-        .input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(0, 255, 65, 0.2);
-        }
-        
-        .input::placeholder {
-            color: var(--dark-text);
-        }
-        
-        .btn {
-            width: 100%;
-            padding: 12px 16px;
-            background-color: var(--primary-color);
-            color: var(--dark-bg);
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .btn:hover {
-            background-color: #00cc33;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 255, 65, 0.3);
-        }
-        
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .btn-paid {
-            background-color: var(--secondary-color);
-            color: var(--light-text);
-        }
-        
-        .btn-paid:hover {
-            background-color: #cc0033;
-            box-shadow: 0 10px 20px rgba(255, 0, 64, 0.3);
-        }
-        
-        .cheats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-        
-        @media (min-width: 640px) {
-            .cheats-grid {
-                grid-template-columns: repeat(3, 1fr);
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00ff41',
+                        secondary: '#ff0040',
+                        card: 'rgba(20, 20, 20, 0.6)'
+                    }
+                }
             }
         }
-        
-        .cheat-item {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 16px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background-color: rgba(255, 255, 255, 0.05);
-            cursor: pointer;
-            transition: var(--transition);
+    </script>
+    <style>
+        body {
+            background-image: radial-gradient(circle at 20% 35%, rgba(0, 255, 65, 0.1) 0%, transparent 50%), 
+                              radial-gradient(circle at 75% 65%, rgba(255, 0, 64, 0.1) 0%, transparent 50%);
         }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 255, 65, 0.5); border-radius: 4px; }
         
-        .cheat-item:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(0, 255, 65, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(0, 255, 65, 0.8), 0 0 30px rgba(0, 255, 65, 0.4); }
+            100% { box-shadow: 0 0 5px rgba(0, 255, 65, 0.5); }
         }
-        
-        .cheat-item.selected {
-            background-color: rgba(0, 255, 65, 0.2);
-            border-color: var(--primary-color);
+        .active-glow {
+            animation: glow 2s infinite;
         }
-        
-        .cheat-item.paid-selected {
-            background-color: rgba(255, 0, 64, 0.2);
-            border-color: var(--secondary-color);
+
+        @keyframes redGlow {
+            0% { box-shadow: 0 0 5px rgba(255, 0, 64, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(255, 0, 64, 0.8), 0 0 30px rgba(255, 0, 64, 0.4); }
+            100% { box-shadow: 0 0 5px rgba(255, 0, 64, 0.5); }
         }
-        
-        .cheat-icon {
-            height: 32px;
-            width: 32px;
-            color: var(--primary-color);
+        .premium-glow {
+            animation: redGlow 2s infinite;
         }
-        
-        .cheat-item.paid-selected .cheat-icon {
-            color: var(--secondary-color);
+
+        @keyframes titleGlitchLoop {
+            0% { text-shadow: 2px 0 #ff0040, -2px 0 #00ff41; transform: translate(0); }
+            10% { text-shadow: -2px 0 #ff0040, 2px 0 #00ff41; transform: translate(-2px, 1px); }
+            20% { text-shadow: 2px 0 #ff0040, -2px 0 #00ff41; transform: translate(0); }
+            30% { text-shadow: 0 0 10px #00ff41; opacity: 1; transform: translate(0); }
+            40% { text-shadow: -1px 0 #ff0040, 1px 0 #00ff41; opacity: 0.8; transform: translate(1px, -1px); }
+            50% { text-shadow: 0 0 20px #00ff41, 0 0 40px #00ff41; opacity: 1; transform: translate(0); }
+            60% { text-shadow: 0 0 5px #00ff41; transform: translate(0); }
+            100% { text-shadow: 0 0 5px #00ff41; transform: translate(0); }
         }
-        
-        .cheat-name {
-            text-align: center;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--light-text);
-        }
-        
-        .badge {
-            position: absolute;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        
-        .badge-paid {
-            top: -8px;
-            right: -8px;
-            background-color: var(--secondary-color);
-            color: var(--light-text);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .badge-status {
-            top: -8px;
-            left: -8px;
-            background-color: rgba(255, 255, 255, 0.2);
-            color: var(--light-text);
-        }
-        
-        .social-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 16px;
-        }
-        
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            color: var(--dark-text);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .social-link:hover {
-            color: var(--primary-color);
-        }
-        
-        .social-icon {
-            height: 20px;
-            width: 20px;
-        }
-        
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-        
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .modal {
-            background-color: var(--darker-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px;
-            max-width: 500px;
-            width: 90%;
-            transform: scale(0.9);
-            transition: var(--transition);
-        }
-        
-        .modal-overlay.active .modal {
-            transform: scale(1);
-        }
-        
-        .modal-header {
-            margin-bottom: 16px;
-        }
-        
-        .modal-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: var(--light-text);
-        }
-        
-        .modal-description {
-            color: var(--dark-text);
-            margin-bottom: 16px;
-        }
-        
-        .modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            margin-top: 24px;
-        }
-        
-        .btn-outline {
-            background-color: transparent;
-            color: var(--light-text);
-            border: 1px solid var(--border-color);
-        }
-        
-        .btn-outline:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .download-link {
-            margin-top: 16px;
-            padding: 16px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            word-break: break-all;
-        }
-        
-        .download-link a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-        
-        .download-link a:hover {
-            text-decoration: underline;
-        }
-        
-        .spinner {
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--darker-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 16px;
-            max-width: 350px;
-            z-index: 2000;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: var(--transition);
-        }
-        
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        .toast-title {
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
-        
-        .toast-description {
-            font-size: 14px;
-            color: var(--dark-text);
-        }
-        
-        .toast.error {
-            border-color: var(--secondary-color);
-        }
-        
-        .toast.error .toast-title {
-            color: var(--secondary-color);
-        }
-        
-        .whatsapp-btn {
-            background-color: #25D366;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: bold;
-            transition: var(--transition);
-            margin-top: 10px;
-        }
-        
-        .whatsapp-btn:hover {
-            background-color: #128C7E;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
-        }
-        
-        .link-preview {
-            margin-top: 10px;
-            padding: 12px;
-            background-color: rgba(0, 255, 65, 0.1);
-            border: 1px solid rgba(0, 255, 65, 0.3);
-            border-radius: 8px;
-            font-size: 14px;
-            color: var(--dark-text);
-            word-break: break-all;
-        }
-        
-        .link-preview strong {
-            color: var(--primary-color);
+        .title-loop {
+            display: inline-block;
+            animation: titleGlitchLoop 2.5s infinite;
         }
     </style>
 </head>
-<body>
-    <div class="card">
-        <header class="card-header">
-            <a href="/" class="logo">ISINDU <span>x CHEAT</span></a>
-        </header>
+<body class="bg-black text-white min-h-screen flex items-center justify-center p-4">
+
+    <!-- Main Card Container -->
+    <div class="w-full max-w-3xl border-2 border-primary/20 bg-card p-6 shadow-2xl shadow-primary/10 backdrop-blur-sm md:p-8 rounded-lg">
         
-        <main class="card-content">
-            <div class="text-center">
-                <h2 class="title">FULL VERSION RELEASE</h2>
-                <p class="subtitle">2026 FEBRUARY 20</p>
-            </div>
+        <!-- Header -->
+        <div class="p-0 pb-6 text-center">
+            <h1 class="font-sans text-3xl font-bold tracking-tighter text-white md:text-5xl">
+                <span class="title-loop">ISINDU <span class="text-primary">x OPTIMIZE</span></span>
+            </h1>
+            <!-- Spider-Man Image -->
+            <img src="https://z-cdn-media.chatglm.cn/files/6be1a920-b9ce-45f7-834d-c2d6ff29146c.PNG?auth_key=1882330781-0735aa08665d41c4a84769a4c13c35cf-0-df01601e93f876c3a274b92bfad145d7" alt="Spider-Man" class="h-44 w-auto mx-auto mt-4 rounded-lg shadow-lg shadow-blue-500/30 object-cover">
+        </div>
+        
+        <!-- Content -->
+        <div class="p-0">
+            <!-- Separator -->
+            <div class="my-6 border-t border-gray-800"></div>
             
-            <hr class="separator">
-            
-            <div class="space-y-4">
-                <input 
-                    type="text" 
-                    placeholder="Free Fire Username or ID" 
-                    class="input"
-                    id="username"
-                />
-                
-                <button 
-                    class="btn" 
-                    id="generateBtn"
-                >
-                    <span id="btnText">Generate</span>
-                </button>
-            </div>
-            
-            <hr class="separator">
-            
+            <!-- Tools Grid Section -->
             <div>
-                <h3 class="text-center" style="margin-bottom: 16px; font-size: 18px; font-weight: 600; color: white;">Cheat Tools</h3>
-                <div class="cheats-grid" id="cheatsGrid">
-                    <!-- Cheat items will be generated by JavaScript -->
+                <h3 class="mb-4 text-center text-lg font-semibold text-white">Optimization Tools</h3>
+                <div class="grid grid-cols-2 gap-4 sm:grid-cols-3" id="toolsGrid">
+                    
+                    <!-- Tool 1: Optimize Tool (Selected by default) -->
+                    <div class="tool-card active-glow relative flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-primary bg-primary/10 p-4 transition-all duration-300 cursor-pointer" data-status="free" data-name="Optimize Tool">
+                        <i class="fas fa-rocket h-8 w-8 text-primary"></i>
+                        <span class="text-center text-sm font-medium text-white">Optimize Tool</span>
+                    </div>
+
+                    <!-- Tool 2: System Boost -->
+                    <div class="tool-card relative flex flex-col items-center justify-center gap-2 rounded-lg border border-gray-800 bg-white/5 p-4 transition-all duration-300 cursor-pointer hover:bg-white/10" data-status="free" data-name="System Boost">
+                        <div class="absolute -top-2 -left-2 bg-gray-700 text-white text-xs px-2 py-1 rounded-full">Release Soon!</div>
+                        <i class="fas fa-bolt h-8 w-8 text-primary"></i>
+                        <span class="text-center text-sm font-medium text-white">System Boost</span>
+                    </div>
+
+                    <!-- Tool 3: Lag Fix -->
+                    <div class="tool-card relative flex flex-col items-center justify-center gap-2 rounded-lg border border-gray-800 bg-white/5 p-4 transition-all duration-300 cursor-pointer hover:bg-white/10" data-status="free" data-name="Lag Fix">
+                        <div class="absolute -top-2 -left-2 bg-gray-700 text-white text-xs px-2 py-1 rounded-full">Release Soon!</div>
+                        <i class="fas fa-wifi h-8 w-8 text-primary"></i>
+                        <span class="text-center text-sm font-medium text-white">Lag Fix</span>
+                    </div>
+
+                    <!-- Tool 4: VIP Emulator -->
+                    <div class="tool-card premium-glow relative flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-secondary bg-secondary/10 p-4 transition-all duration-300 cursor-pointer" data-status="paid" data-name="VIP Emulator">
+                        <div class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold">Rs 850</div>
+                        <i class="fas fa-gem h-8 w-8 text-secondary"></i>
+                        <span class="text-center text-sm font-medium text-white">VIP Emulator</span>
+                        <div class="text-xs text-gray-400 text-center">Click to purchase</div>
+                    </div>
+
+                    <!-- Tool 5: Film -->
+                    <div class="tool-card relative flex flex-col items-center justify-center gap-2 rounded-lg border border-gray-800 bg-white/5 p-4 transition-all duration-300 cursor-pointer hover:bg-white/10" data-status="free" data-name="Film">
+                        <div class="absolute -top-2 -left-2 bg-green-600 text-white text-xs px-2 py-1 rounded-full font-bold">Free</div>
+                        <i class="fas fa-film h-8 w-8 text-primary"></i>
+                        <span class="text-center text-sm font-medium text-white">Film</span>
+                    </div>
+
+                </div>
+                
+                <!-- Dynamic Action Button -->
+                <div id="actionBtnContainer" class="hidden mt-6 transition-all duration-300">
+                    <a id="actionBtn" href="#" target="_blank" class="block w-full text-center font-bold py-3 px-4 rounded-md transition-colors">
+                        <span id="actionBtnText">Free</span>
+                    </a>
                 </div>
             </div>
             
-            <hr class="separator">
+            <!-- Separator -->
+            <div class="my-6 border-t border-gray-800"></div>
             
-            <div class="social-links">
-                <a href="https://wa.me/94761816091" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <i class="fab fa-whatsapp social-icon"></i>
+            <!-- Footer / Social Links -->
+            <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
+                <a href="https://wa.me/94761816091" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition-colors">
+                    <i class="fab fa-whatsapp h-5 w-5"></i>
                     Contact Me
                 </a>
-                <a href="https://www.youtube.com/@ISINDUXCHEATS" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <i class="fab fa-youtube social-icon"></i>
+                <a href="#" class="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition-colors">
+                    <i class="fab fa-youtube h-5 w-5"></i>
                     My YouTube
                 </a>
-                <a href="https://discord.com/channels/@me" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <i class="fab fa-discord social-icon"></i>
-                    My Discord
-                </a>
-                <a href="https://www.blogger.com/blog/themes/edit/6010256538167640628" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <i class="fas fa-rss social-icon"></i>
-                    My Blog
-                </a>
-            </div>
-        </main>
-    </div>
-    
-    <!-- Purchase Modal -->
-    <div class="modal-overlay" id="purchaseModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 class="modal-title">Purchase Optimize Emulator</h3>
-            </div>
-            <div class="modal-description">
-                <p>The Optimize Emulator tool is available for <strong>Rs 850</strong>.</p>
-                <p style="margin-top: 10px;">To purchase, please contact us via WhatsApp:</p>
-                <p style="margin-top: 10px; font-size: 18px; color: var(--primary-color);"><strong>+94761816091</strong></p>
-                <p style="margin-top: 10px;">We'll guide you through the payment process and provide immediate access after purchase.</p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline" id="cancelPurchase">Cancel</button>
-                <a href="https://wa.me/94761816091?text=Hi%20ISINDU%20xCHEAT,%20I%20want%20to%20purchase%20the%20Optimize%20Emulator%20tool%20for%20Rs%20850" 
-                   target="_blank" 
-                   class="whatsapp-btn">
-                    <i class="fab fa-whatsapp"></i>
-                    Contact on WhatsApp
-                </a>
             </div>
         </div>
     </div>
-    
-    <!-- Verification Modal -->
-    <div class="modal-overlay" id="verificationModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 class="modal-title">Human Verification</h3>
-            </div>
-            <div class="modal-description" id="verificationChallenge">
-                <!-- Challenge text will be inserted here -->
-            </div>
-            <input 
-                type="text" 
-                placeholder="Your answer"
-                class="input"
-                id="verificationAnswer"
-            />
-            <div class="modal-footer">
-                <button class="btn btn-outline" id="cancelVerification">Cancel</button>
-                <button class="btn" id="submitVerification">
-                    <span id="verificationBtnText">Submit</span>
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Download Modal -->
-    <div class="modal-overlay" id="downloadModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 class="modal-title">Download Your Project</h3>
-            </div>
-            <div class="modal-description">
-                Your secure download link has been generated.
-            </div>
-            <div class="download-link">
-                <a href="#" id="downloadLink" target="_blank" rel="noopener noreferrer">
-                    <!-- Download link will be inserted here -->
-                </a>
-            </div>
-            <div class="modal-footer">
-                <button class="btn" id="closeDownload">Close</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">
-        <div class="toast-title" id="toastTitle"></div>
-        <div class="toast-description" id="toastDescription"></div>
-    </div>
-    
+
+    <!-- Simple JavaScript for UI interaction -->
     <script>
-        // Cheat data
-        const cheats = [
-            { id: 'aimbot', name: 'Aimbot', icon: 'fas fa-crosshairs' },
-            { id: 'free-project', name: 'Free Project', icon: 'fas fa-file-code', status: 'Release Soon!' },
-            { id: 'optimize', name: 'Optimize Tool', icon: 'fas fa-rocket' },
-            { id: 'id-search', name: 'ID Search', icon: 'fas fa-search', status: 'Release Soon!' },
-            { id: 'optimize-emulator', name: 'Optimize Emulator', icon: 'fas fa-gem', isPaid: true, price: 850 },
-        ];
-        
-        // State
-        let selectedCheat = '';
-        let isLoading = false;
-        let isVerifying = false;
-        
-        // DOM Elements
-        const usernameInput = document.getElementById('username');
-        const generateBtn = document.getElementById('generateBtn');
-        const btnText = document.getElementById('btnText');
-        const cheatsGrid = document.getElementById('cheatsGrid');
-        const purchaseModal = document.getElementById('purchaseModal');
-        const cancelPurchase = document.getElementById('cancelPurchase');
-        const verificationModal = document.getElementById('verificationModal');
-        const verificationChallenge = document.getElementById('verificationChallenge');
-        const verificationAnswer = document.getElementById('verificationAnswer');
-        const cancelVerification = document.getElementById('cancelVerification');
-        const submitVerification = document.getElementById('submitVerification');
-        const verificationBtnText = document.getElementById('verificationBtnText');
-        const downloadModal = document.getElementById('downloadModal');
-        const downloadLink = document.getElementById('downloadLink');
-        const closeDownload = document.getElementById('closeDownload');
-        const toast = document.getElementById('toast');
-        const toastTitle = document.getElementById('toastTitle');
-        const toastDescription = document.getElementById('toastDescription');
-        
-        // Initialize
-        function init() {
-            renderCheats();
-            setupEventListeners();
-        }
-        
-        // Render cheat items
-        function renderCheats() {
-            cheatsGrid.innerHTML = '';
-            
-            cheats.forEach(cheat => {
-                const cheatItem = document.createElement('div');
-                cheatItem.className = `cheat-item ${selectedCheat === cheat.id ? (cheat.isPaid ? 'paid-selected' : 'selected') : ''}`;
-                cheatItem.dataset.id = cheat.id;
+        const cards = document.querySelectorAll('.tool-card');
+        const actionBtnContainer = document.getElementById('actionBtnContainer');
+        const actionBtn = document.getElementById('actionBtn');
+        const actionBtnText = document.getElementById('actionBtnText');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const status = card.getAttribute('data-status');
+                const name = card.getAttribute('data-name');
                 
-                let badgesHTML = '';
-                if (cheat.isPaid) {
-                    badgesHTML = `<div class="badge badge-paid">Rs ${cheat.price}</div>`;
-                }
-                if (cheat.status) {
-                    badgesHTML = `<div class="badge badge-status">${cheat.status}</div>`;
-                }
-                
-                cheatItem.innerHTML = `
-                    ${badgesHTML}
-                    <i class="${cheat.icon} cheat-icon"></i>
-                    <span class="cheat-name">${cheat.name}</span>
-                `;
-                
-                cheatItem.addEventListener('click', () => selectCheat(cheat.id));
-                cheatsGrid.appendChild(cheatItem);
-            });
-        }
-        
-        // Select a cheat
-        function selectCheat(id) {
-            selectedCheat = id;
-            const selectedCheatInfo = cheats.find(c => c.id === id);
-            
-            document.querySelectorAll('.cheat-item').forEach(item => {
-                item.classList.remove('selected', 'paid-selected');
-            });
-            
-            const selectedItem = document.querySelector(`[data-id="${id}"]`);
-            if (selectedCheatInfo?.isPaid) {
-                selectedItem.classList.add('paid-selected');
-            } else {
-                selectedItem.classList.add('selected');
-            }
-            
-            // Update button text and style
-            if (selectedCheatInfo?.isPaid) {
-                btnText.textContent = `Buy Now for Rs ${selectedCheatInfo.price}`;
-                generateBtn.classList.add('btn-paid');
-            } else {
-                btnText.textContent = 'Generate';
-                generateBtn.classList.remove('btn-paid');
-            }
-        }
-        
-        // Setup event listeners
-        function setupEventListeners() {
-            generateBtn.addEventListener('click', handleGenerate);
-            cancelPurchase.addEventListener('click', closePurchaseModal);
-            cancelVerification.addEventListener('click', closeVerificationModal);
-            submitVerification.addEventListener('click', handleVerificationSubmit);
-            closeDownload.addEventListener('click', closeDownloadModal);
-            
-            // Close modals when clicking outside
-            purchaseModal.addEventListener('click', (e) => {
-                if (e.target === purchaseModal) closePurchaseModal();
-            });
-            verificationModal.addEventListener('click', (e) => {
-                if (e.target === verificationModal) closeVerificationModal();
-            });
-            downloadModal.addEventListener('click', (e) => {
-                if (e.target === downloadModal) closeDownloadModal();
-            });
-        }
-        
-        // Handle generate button click
-        function handleGenerate() {
-            const username = usernameInput.value.trim();
-            
-            if (!username || !selectedCheat) {
-                showToast('Error', 'Please enter your username and select a tool.', true);
-                return;
-            }
-            
-            const selectedCheatInfo = cheats.find(c => c.id === selectedCheat);
-            
-            if (selectedCheatInfo?.isPaid) {
-                // Show purchase modal instead of directly opening WhatsApp
-                openPurchaseModal();
-                return;
-            }
-            
-            if (selectedCheatInfo?.status) {
-                showToast('Coming Soon', `The "${selectedCheatInfo.name}" tool is not yet available.`);
-                return;
-            }
-            
-            isLoading = true;
-            generateBtn.disabled = true;
-            btnText.innerHTML = '<i class="fas fa-spinner spinner"></i>';
-            
-            // Simulate loading
-            setTimeout(() => {
-                try {
-                    let toolLink;
+                // Remove active states from all cards
+                cards.forEach(c => {
+                    c.classList.remove('active-glow', 'premium-glow', 'border-primary', 'border-secondary', 'bg-primary/10', 'bg-secondary/10', 'border-2');
+                    c.classList.add('border', 'border-gray-800', 'bg-white/5');
                     
-                    if (selectedCheat === 'optimize') {
-                        // Updated link for Optimize Tool
-                        toolLink = 'https://drive.google.com/file/d/1xVfyH68d7eDpSXdYtjWKUO-bxu5KbL__/view';
-                        
-                        // Force open in new tab with multiple methods
-                        const newWindow = window.open(toolLink, '_blank', 'noopener,noreferrer');
-                        if (!newWindow) {
-                            // Fallback if popup is blocked
-                            window.location.href = toolLink;
-                        }
-                        
-                        // Also create a temporary link element as backup
-                        const tempLink = document.createElement('a');
-                        tempLink.href = toolLink;
-                        tempLink.target = '_blank';
-                        tempLink.rel = 'noopener noreferrer';
-                        document.body.appendChild(tempLink);
-                        tempLink.click();
-                        document.body.removeChild(tempLink);
-                        
-                        const toolName = cheats.find(c => c.id === selectedCheat)?.name || 'Tool';
-                        showToast(`${toolName} Link`, `The page for "${toolName}" has been opened in a new tab.`);
-                        
-                        // Show link preview for backup
-                        setTimeout(() => {
-                            showToast('Link Info', `If the tab didn't open, use this link: <strong>${toolLink}</strong>`, false, 5000);
-                        }, 1000);
-                        
-                    } else if (selectedCheat === 'aimbot') {
-                        toolLink = 'https://www.mediafire.com/file/6qvkjzin1dm9qan/EXTERNAL+NEW+WITH++AIMBOT+AI+ESP.rar/file';
-                        window.open(toolLink, '_blank');
-                        const toolName = cheats.find(c => c.id === selectedCheat)?.name || 'Tool';
-                        showToast(`${toolName} Link`, `The page for "${toolName}" has been opened in a new tab.`);
-                    } else {
-                        toolLink = '#';
-                        showToast('Link Not Available', 'A link for this tool is not available yet.');
+                    const icon = c.querySelector('i');
+                    if(icon.classList.contains('text-secondary')) {
+                        icon.classList.remove('text-secondary');
+                        icon.classList.add('text-primary');
                     }
-                } catch (error) {
-                    console.error(error);
-                    showToast('Uh oh!', 'Something went wrong while opening the tool link.', true);
-                } finally {
-                    isLoading = false;
-                    generateBtn.disabled = false;
-                    const selectedCheatInfo = cheats.find(c => c.id === selectedCheat);
-                    btnText.textContent = selectedCheatInfo?.isPaid ? 
-                        `Buy Now for Rs ${selectedCheatInfo.price}` : 'Generate';
-                }
-            }, 1000);
-        }
-        
-        // Open purchase modal
-        function openPurchaseModal() {
-            purchaseModal.classList.add('active');
-        }
-        
-        // Close purchase modal
-        function closePurchaseModal() {
-            purchaseModal.classList.remove('active');
-        }
-        
-        // Handle verification submission
-        function handleVerificationSubmit() {
-            const answer = verificationAnswer.value.trim();
-            
-            if (!answer) {
-                showToast('Verification Failed', 'Please enter an answer.', true);
-                return;
-            }
-            
-            isVerifying = true;
-            submitVerification.disabled = true;
-            verificationBtnText.innerHTML = '<i class="fas fa-spinner spinner"></i>';
-            
-            // Simulate verification
-            setTimeout(() => {
-                // This is a mock verification
-                // In a real app, you'd have a backend to verify the solution
-                if (answer.toLowerCase() !== 'test') {
-                    showToast('Verification Failed', 'Please try again.', true);
-                    isVerifying = false;
-                    submitVerification.disabled = false;
-                    verificationBtnText.textContent = 'Submit';
-                    return;
-                }
+                });
+
+                // Apply new active state and show button
+                card.classList.remove('border', 'border-gray-800', 'bg-white/5');
+                actionBtnContainer.classList.remove('hidden'); 
                 
-                showToast('Verification Successful!', 'Generating your project link...');
-                
-                // Simulate link generation
-                setTimeout(() => {
-                    const generatedLink = 'https://example.com/download/secure-link-' + Math.random().toString(36).substring(7);
-                    downloadLink.href = generatedLink;
-                    downloadLink.textContent = generatedLink;
+                if (status === 'paid') {
+                    card.classList.add('premium-glow', 'border-2', 'border-secondary', 'bg-secondary/10');
+                    card.querySelector('i').classList.remove('text-primary');
+                    card.querySelector('i').classList.add('text-secondary');
                     
-                    closeVerificationModal();
-                    openDownloadModal();
+                    actionBtnText.textContent = 'Buy Now for Rs 850';
+                    actionBtn.href = 'https://wa.me/94761816091?text=Hi%20ISINDU,%20I%20want%20to%20buy%20the%20VIP%20Emulator';
+                    actionBtn.className = 'block w-full text-center font-bold py-3 px-4 rounded-md transition-colors bg-secondary hover:bg-secondary/90 text-white';
+                } else {
+                    card.classList.add('active-glow', 'border-2', 'border-primary', 'bg-primary/10');
                     
-                    isVerifying = false;
-                    submitVerification.disabled = false;
-                    verificationBtnText.textContent = 'Submit';
-                }, 1500);
-            }, 1000);
-        }
-        
-        // Show verification modal
-        function showVerificationModal() {
-            verificationChallenge.innerHTML = `
-                Please solve this simple math problem: 5 + 3 = ?
-                <p class="text-xs text-muted-foreground mt-2">Hint: test</p>
-            `;
-            verificationModal.classList.add('active');
-            verificationAnswer.focus();
-        }
-        
-        // Close verification modal
-        function closeVerificationModal() {
-            if (!isVerifying) {
-                verificationModal.classList.remove('active');
-                verificationAnswer.value = '';
-            }
-        }
-        
-        // Open download modal
-        function openDownloadModal() {
-            downloadModal.classList.add('active');
-        }
-        
-        // Close download modal
-        function closeDownloadModal() {
-            downloadModal.classList.remove('active');
-        }
-        
-        // Show toast notification
-        function showToast(title, description, isError = false, duration = 3000) {
-            toastTitle.textContent = title;
-            toastDescription.innerHTML = description;
-            
-            if (isError) {
-                toast.classList.add('error');
-            } else {
-                toast.classList.remove('error');
-            }
-            
-            toast.classList.add('show');
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, duration);
-        }
-        
-        // Initialize the app
-        init();
+                    actionBtnText.textContent = 'Free';
+                    
+                    // Add your Google Drive link specifically for the Optimize Tool
+                    if (name === 'Optimize Tool') {
+                        actionBtn.href = 'https://drive.google.com/file/d/1xVfyH68d7eDpSXdYtjWKUO-bxu5KbL__/view?usp=sharing';
+                    } else {
+                        actionBtn.href = '#'; // Other tools stay on the same page
+                    }
+                    
+                    actionBtn.className = 'block w-full text-center font-bold py-3 px-4 rounded-md transition-colors bg-primary hover:bg-primary/90 text-black';
+                }
+            });
+        });
     </script>
 </body>
 </html>
