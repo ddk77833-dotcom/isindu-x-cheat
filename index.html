@@ -21,8 +21,10 @@
     </script>
     <style>
         body {
+            background-color: #000000;
             background-image: radial-gradient(circle at 20% 35%, rgba(0, 255, 65, 0.1) 0%, transparent 50%), 
                               radial-gradient(circle at 75% 65%, rgba(255, 0, 64, 0.1) 0%, transparent 50%);
+            margin: 0;
         }
 
         ::-webkit-scrollbar { width: 8px; }
@@ -34,18 +36,14 @@
             50% { box-shadow: 0 0 20px rgba(0, 255, 65, 0.8), 0 0 30px rgba(0, 255, 65, 0.4); }
             100% { box-shadow: 0 0 5px rgba(0, 255, 65, 0.5); }
         }
-        .active-glow {
-            animation: glow 2s infinite;
-        }
+        .active-glow { animation: glow 2s infinite; }
 
         @keyframes redGlow {
             0% { box-shadow: 0 0 5px rgba(255, 0, 64, 0.5); }
             50% { box-shadow: 0 0 20px rgba(255, 0, 64, 0.8), 0 0 30px rgba(255, 0, 64, 0.4); }
             100% { box-shadow: 0 0 5px rgba(255, 0, 64, 0.5); }
         }
-        .premium-glow {
-            animation: redGlow 2s infinite;
-        }
+        .premium-glow { animation: redGlow 2s infinite; }
 
         @keyframes titleGlitchLoop {
             0% { text-shadow: 2px 0 #ff0040, -2px 0 #00ff41; transform: translate(0); }
@@ -57,100 +55,196 @@
             60% { text-shadow: 0 0 5px #00ff41; transform: translate(0); }
             100% { text-shadow: 0 0 5px #00ff41; transform: translate(0); }
         }
-        .title-loop {
-            display: inline-block;
-            animation: titleGlitchLoop 2.5s infinite;
+        .title-loop { display: inline-block; animation: titleGlitchLoop 2.5s infinite; }
+
+        @keyframes pulseStartBtn {
+            0% { box-shadow: 0 0 20px rgba(0, 255, 65, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(0, 255, 65, 0.8), 0 0 60px rgba(0, 255, 65, 0.4); }
+            100% { box-shadow: 0 0 20px rgba(0, 255, 65, 0.4); }
+        }
+        .start-btn-glow {
+            animation: pulseStartBtn 2s infinite;
+        }
+
+        /* Rating Stars */
+        .star-rating i {
+            color: #333;
+            cursor: pointer;
+            transition: color 0.2s, text-shadow 0.2s;
+            font-size: 24px;
+        }
+        .star-rating i.active {
+            color: #00ff41;
+            text-shadow: 0 0 10px #00ff41;
+        }
+        .star-rating i:hover {
+            color: #00ff41;
+            text-shadow: 0 0 15px #00ff41;
         }
     </style>
 </head>
-<body class="bg-black text-white min-h-screen flex items-center justify-center p-4">
+<body class="text-white min-h-screen flex items-center justify-center p-4">
 
-    <!-- Main Card Container -->
-    <div class="w-full max-w-3xl border-2 border-primary/20 bg-card p-6 shadow-2xl shadow-primary/10 backdrop-blur-sm md:p-8 rounded-lg">
-        
-        <!-- Header -->
-        <div class="p-0 pb-6 text-center">
-            <h1 class="font-sans text-3xl font-bold tracking-tighter text-white md:text-5xl">
-                <span class="title-loop">ISINDU <span class="text-primary">x OPTIMIZE</span></span>
-            </h1>
-            <!-- Spider-Man Image -->
-            <img src="https://z-cdn-media.chatglm.cn/files/6be1a920-b9ce-45f7-834d-c2d6ff29146c.PNG?auth_key=1882330781-0735aa08665d41c4a84769a4c13c35cf-0-df01601e93f876c3a274b92bfad145d7" alt="Spider-Man" class="h-44 w-auto mx-auto mt-4 rounded-lg shadow-lg shadow-blue-500/30 object-cover">
-        </div>
-        
-        <!-- Content -->
-        <div class="p-0">
-            <!-- Separator -->
-            <div class="my-6 border-t border-gray-800"></div>
+    <!-- START SCREEN -->
+    <div id="startScreen" class="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center transition-opacity duration-500">
+        <h1 class="font-sans text-4xl md:text-6xl font-bold tracking-tighter text-white mb-12 title-loop text-center px-4">
+            ISINDU <span class="text-primary">x OPTIMIZE</span>
+        </h1>
+        <button id="startBtn" class="start-btn-glow bg-primary text-black font-bold py-4 px-16 rounded-lg text-2xl hover:bg-primary/80 transition-all duration-300 cursor-pointer hover:scale-105">
+            START
+        </button>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="mainContent" class="hidden w-full max-w-3xl">
+        <div class="border-2 border-primary/20 bg-card p-6 shadow-2xl shadow-primary/10 backdrop-blur-sm md:p-8 rounded-lg">
             
-            <!-- Tools Grid Section -->
-            <div>
-                <h3 class="mb-4 text-center text-lg font-semibold text-white">Optimization Tools</h3>
-                <div class="grid grid-cols-2 gap-4 sm:grid-cols-3" id="toolsGrid">
-                    
-                    <!-- Tool 1: Optimize Tool (Selected by default) -->
-                    <div class="tool-card active-glow relative flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-primary bg-primary/10 p-4 transition-all duration-300 cursor-pointer" data-status="free" data-name="Optimize Tool">
-                        <i class="fas fa-rocket h-8 w-8 text-primary"></i>
-                        <span class="text-center text-sm font-medium text-white">Optimize Tool</span>
-                    </div>
-
-                    <!-- Tool 2: System Boost -->
-                    <div class="tool-card relative flex flex-col items-center justify-center gap-2 rounded-lg border border-gray-800 bg-white/5 p-4 transition-all duration-300 cursor-pointer hover:bg-white/10" data-status="free" data-name="System Boost">
-                        <div class="absolute -top-2 -left-2 bg-gray-700 text-white text-xs px-2 py-1 rounded-full">Release Soon!</div>
-                        <i class="fas fa-bolt h-8 w-8 text-primary"></i>
-                        <span class="text-center text-sm font-medium text-white">System Boost</span>
-                    </div>
-
-                    <!-- Tool 3: Lag Fix -->
-                    <div class="tool-card relative flex flex-col items-center justify-center gap-2 rounded-lg border border-gray-800 bg-white/5 p-4 transition-all duration-300 cursor-pointer hover:bg-white/10" data-status="free" data-name="Lag Fix">
-                        <div class="absolute -top-2 -left-2 bg-gray-700 text-white text-xs px-2 py-1 rounded-full">Release Soon!</div>
-                        <i class="fas fa-wifi h-8 w-8 text-primary"></i>
-                        <span class="text-center text-sm font-medium text-white">Lag Fix</span>
-                    </div>
-
-                    <!-- Tool 4: VIP Emulator -->
-                    <div class="tool-card premium-glow relative flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-secondary bg-secondary/10 p-4 transition-all duration-300 cursor-pointer" data-status="paid" data-name="VIP Emulator">
-                        <div class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold">Rs 850</div>
-                        <i class="fas fa-gem h-8 w-8 text-secondary"></i>
-                        <span class="text-center text-sm font-medium text-white">VIP Emulator</span>
-                        <div class="text-xs text-gray-400 text-center">Click to purchase</div>
-                    </div>
-
-                    <!-- Tool 5: Film -->
-                    <div class="tool-card relative flex flex-col items-center justify-center gap-2 rounded-lg border border-gray-800 bg-white/5 p-4 transition-all duration-300 cursor-pointer hover:bg-white/10" data-status="free" data-name="Film">
-                        <div class="absolute -top-2 -left-2 bg-green-600 text-white text-xs px-2 py-1 rounded-full font-bold">Free</div>
-                        <i class="fas fa-film h-8 w-8 text-primary"></i>
-                        <span class="text-center text-sm font-medium text-white">Film</span>
-                    </div>
-
-                </div>
-                
-                <!-- Dynamic Action Button -->
-                <div id="actionBtnContainer" class="hidden mt-6 transition-all duration-300">
-                    <a id="actionBtn" href="#" target="_blank" class="block w-full text-center font-bold py-3 px-4 rounded-md transition-colors">
-                        <span id="actionBtnText">Free</span>
-                    </a>
-                </div>
+            <!-- Header -->
+            <div class="p-0 pb-6 text-center">
+                <h1 class="font-sans text-3xl font-bold tracking-tighter text-white md:text-5xl">
+                    <span class="title-loop">ISINDU <span class="text-primary">x OPTIMIZE</span></span>
+                </h1>
+                <img src="https://z-cdn-media.chatglm.cn/files/6be1a920-b9ce-45f7-834d-c2d6ff29146c.PNG?auth_key=1882330781-0735aa08665d41c4a84769a4c13c35cf-0-df01601e93f876c3a274b92bfad145d7" alt="Spider-Man" class="h-44 w-auto mx-auto mt-4 rounded-lg shadow-lg shadow-blue-500/30 object-cover">
             </div>
             
-            <!-- Separator -->
-            <div class="my-6 border-t border-gray-800"></div>
-            
-            <!-- Footer / Social Links -->
-            <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
-                <a href="https://wa.me/94761816091" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition-colors">
-                    <i class="fab fa-whatsapp h-5 w-5"></i>
-                    Contact Me
-                </a>
-                <a href="#" class="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition-colors">
-                    <i class="fab fa-youtube h-5 w-5"></i>
-                    My YouTube
-                </a>
+            <!-- Content -->
+            <div class="p-0">
+                <div class="my-6 border-t border-gray-800"></div>
+                
+                <!-- Tools Grid Section -->
+                <div>
+                    <h3 class="mb-4 text-center text-lg font-semibold text-white">Optimization Tools</h3>
+                    <div class="grid grid-cols-2 gap-4 sm:grid-cols-3" id="toolsGrid">
+                        
+                        <div class="tool-card active-glow relative flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-primary bg-primary/10 p-4 transition-all duration-300 cursor-pointer" data-status="free" data-name="Optimize Tool">
+                            <i class="fas fa-rocket h-8 w-8 text-primary"></i>
+                            <span class="text-center text-sm font-medium text-white">Optimize Tool</span>
+                        </div>
+
+                        <div class="tool-card relative flex flex-col items-center justify-center gap-2 rounded-lg border border-gray-800 bg-white/5 p-4 transition-all duration-300 cursor-pointer hover:bg-white/10" data-status="soon" data-name="System Boost">
+                            <div class="absolute -top-2 -left-2 bg-gray-700 text-white text-xs px-2 py-1 rounded-full">Coming Soon!</div>
+                            <i class="fas fa-bolt h-8 w-8 text-primary"></i>
+                            <span class="text-center text-sm font-medium text-white">System Boost</span>
+                        </div>
+
+                        <div class="tool-card relative flex flex-col items-center justify-center gap-2 rounded-lg border border-gray-800 bg-white/5 p-4 transition-all duration-300 cursor-pointer hover:bg-white/10" data-status="free" data-name="Lag Fix">
+                            <i class="fas fa-wifi h-8 w-8 text-primary"></i>
+                            <span class="text-center text-sm font-medium text-white">Lag Fix</span>
+                        </div>
+
+                        <div class="tool-card premium-glow relative flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-secondary bg-secondary/10 p-4 transition-all duration-300 cursor-pointer" data-status="paid" data-name="VIP Emulator">
+                            <div class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold">Rs 850</div>
+                            <i class="fas fa-gem h-8 w-8 text-secondary"></i>
+                            <span class="text-center text-sm font-medium text-white">VIP Emulator</span>
+                            <div class="text-xs text-gray-400 text-center">Click to purchase</div>
+                        </div>
+
+                        <div class="tool-card relative flex flex-col items-center justify-center gap-2 rounded-lg border border-gray-800 bg-white/5 p-4 transition-all duration-300 cursor-pointer hover:bg-white/10" data-status="paid" data-name="Optimize Windows 10">
+                            <div class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold">Rs 850</div>
+                            <i class="fab fa-windows h-8 w-8 text-primary"></i>
+                            <span class="text-center text-xs font-medium text-white leading-tight">Optimize Windows 10</span>
+                            <div class="text-xs text-gray-400 text-center">Click to purchase</div>
+                        </div>
+
+                        <div class="tool-card relative flex flex-col items-center justify-center gap-2 rounded-lg border border-gray-800 bg-white/5 p-4 transition-all duration-300 cursor-pointer hover:bg-white/10" data-status="soon" data-name="Free Lag Fix Emulator">
+                            <div class="absolute -top-2 -left-2 bg-gray-700 text-white text-xs px-2 py-1 rounded-full">Coming Soon!</div>
+                            <i class="fas fa-desktop h-8 w-8 text-primary"></i>
+                            <span class="text-center text-xs font-medium text-white leading-tight">Free Lag Fix Emulator</span>
+                        </div>
+
+                    </div>
+                    
+                    <!-- Dynamic Action Button -->
+                    <div id="actionBtnContainer" class="hidden mt-6 transition-all duration-300">
+                        <a id="actionBtn" href="#" target="_blank" class="block w-full text-center font-bold py-3 px-4 rounded-md transition-colors">
+                            <span id="actionBtnText">Free</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="my-6 border-t border-gray-800"></div>
+
+                <!-- Rating Section -->
+                <div class="text-center mb-6">
+                    <h4 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-3">Rate Our Tools</h4>
+                    <div class="star-rating flex justify-center gap-2" id="starRating">
+                        <i class="fas fa-star" data-rating="1"></i>
+                        <i class="fas fa-star" data-rating="2"></i>
+                        <i class="fas fa-star" data-rating="3"></i>
+                        <i class="fas fa-star" data-rating="4"></i>
+                        <i class="fas fa-star" data-rating="5"></i>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2" id="ratingText">Select a rating</p>
+                </div>
+                
+                <div class="my-6 border-t border-gray-800"></div>
+                
+                <!-- Footer / Social Links -->
+                <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
+                    <a href="https://wa.me/94761816091" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition-colors">
+                        <i class="fab fa-whatsapp h-5 w-5"></i>
+                        Contact Me
+                    </a>
+                    <a href="https://www.youtube.com/@ISINDUXCHEATS" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition-colors">
+                        <i class="fab fa-youtube h-5 w-5"></i>
+                        My YouTube
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Simple JavaScript for UI interaction -->
+    <!-- JavaScript -->
     <script>
+        // --- START SCREEN & AUDIO LOGIC ---
+        const startScreen = document.getElementById('startScreen');
+        const mainContent = document.getElementById('mainContent');
+        const startBtn = document.getElementById('startBtn');
+
+        startBtn.addEventListener('click', () => {
+            window.speechSynthesis.cancel(); 
+            const textToSpeak = "isindu x optimize";
+            const utterance = new SpeechSynthesisUtterance(textToSpeak);
+            utterance.rate = 0.9; 
+            utterance.pitch = 1.0;
+            window.speechSynthesis.speak(utterance);
+
+            startScreen.style.opacity = '0';
+            
+            setTimeout(() => {
+                startScreen.classList.add('hidden');
+                mainContent.classList.remove('hidden');
+            }, 500); 
+        });
+
+        // --- RATING LOGIC ---
+        const stars = document.querySelectorAll('.star-rating i');
+        const ratingText = document.getElementById('ratingText');
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const rating = parseInt(star.getAttribute('data-rating'));
+                
+                // Remove active class from all stars
+                stars.forEach(s => s.classList.remove('active'));
+                
+                // Add active class to clicked star and all previous stars
+                stars.forEach(s => {
+                    if (parseInt(s.getAttribute('data-rating')) <= rating) {
+                        s.classList.add('active');
+                    }
+                });
+
+                // Update text
+                if (rating === 1) ratingText.textContent = "Poor";
+                else if (rating === 2) ratingText.textContent = "Fair";
+                else if (rating === 3) ratingText.textContent = "Good";
+                else if (rating === 4) ratingText.textContent = "Very Good";
+                else if (rating === 5) ratingText.textContent = "Excellent! Thank you!";
+            });
+        });
+
+        // --- TOOL CARD CLICK LOGIC ---
         const cards = document.querySelectorAll('.tool-card');
         const actionBtnContainer = document.getElementById('actionBtnContainer');
         const actionBtn = document.getElementById('actionBtn');
@@ -161,11 +255,9 @@
                 const status = card.getAttribute('data-status');
                 const name = card.getAttribute('data-name');
                 
-                // Remove active states from all cards
                 cards.forEach(c => {
                     c.classList.remove('active-glow', 'premium-glow', 'border-primary', 'border-secondary', 'bg-primary/10', 'bg-secondary/10', 'border-2');
                     c.classList.add('border', 'border-gray-800', 'bg-white/5');
-                    
                     const icon = c.querySelector('i');
                     if(icon.classList.contains('text-secondary')) {
                         icon.classList.remove('text-secondary');
@@ -173,31 +265,33 @@
                     }
                 });
 
-                // Apply new active state and show button
                 card.classList.remove('border', 'border-gray-800', 'bg-white/5');
-                actionBtnContainer.classList.remove('hidden'); 
                 
                 if (status === 'paid') {
+                    actionBtnContainer.classList.remove('hidden'); 
                     card.classList.add('premium-glow', 'border-2', 'border-secondary', 'bg-secondary/10');
                     card.querySelector('i').classList.remove('text-primary');
                     card.querySelector('i').classList.add('text-secondary');
-                    
                     actionBtnText.textContent = 'Buy Now for Rs 850';
-                    actionBtn.href = 'https://wa.me/94761816091?text=Hi%20ISINDU,%20I%20want%20to%20buy%20the%20VIP%20Emulator';
+                    actionBtn.href = `https://wa.me/94761816091?text=Hi%20ISINDU,%20I%20want%20to%20buy%20the%20${encodeURIComponent(name)}`;
                     actionBtn.className = 'block w-full text-center font-bold py-3 px-4 rounded-md transition-colors bg-secondary hover:bg-secondary/90 text-white';
-                } else {
+                } 
+                else if (status === 'soon') {
+                    actionBtnContainer.classList.add('hidden'); 
+                    card.classList.add('active-glow', 'border-2', 'border-primary', 'bg-primary/10');
+                }
+                else if (status === 'free') {
+                    actionBtnContainer.classList.remove('hidden'); 
                     card.classList.add('active-glow', 'border-2', 'border-primary', 'bg-primary/10');
                     
                     actionBtnText.textContent = 'Free';
-                    
-                    // Add your Google Drive link specifically for the Optimize Tool
-                    if (name === 'Optimize Tool') {
-                        actionBtn.href = 'https://drive.google.com/file/d/1xVfyH68d7eDpSXdYtjWKUO-bxu5KbL__/view?usp=sharing';
-                    } else {
-                        actionBtn.href = '#'; // Other tools stay on the same page
-                    }
-                    
                     actionBtn.className = 'block w-full text-center font-bold py-3 px-4 rounded-md transition-colors bg-primary hover:bg-primary/90 text-black';
+                    
+                    if (name === 'Optimize Tool' || name === 'Lag Fix') {
+                        actionBtn.href = 'https://drive.google.com/file/d/1xVfyH68d7eDpSXdYtjWKUO-bxu5KbL__/view';
+                    } else {
+                        actionBtn.href = '#'; 
+                    }
                 }
             });
         });
